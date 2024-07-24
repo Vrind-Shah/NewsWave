@@ -1,5 +1,3 @@
-
-
 import React, { useEffect } from 'react'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner';
@@ -158,5 +156,3 @@ export default function News(props) {
 
   )
 }
-
-

@@ -6,45 +6,20 @@ import { useState } from 'react';
 
 export default function News(props) {
 
-
   const [articles, setarticles] = useState([]);
   const [totalArticles, settotalArticles] = useState(0);
   const [loading, setloading] = useState(true);
   const [page, setpage] = useState(1);
-
-
 
     if (props.category !== '') {
       let a = props.category;
       document.title = (a.charAt(0)).toUpperCase() + a.slice(1, a.length);
     }
 
-//const checking=async()=>{
- // const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-// const qInTitle = "";
-// const from = "";
-// const apiKey = "e80d8762132344ca9219f20be1af9c5c";
-// const url = `${proxyUrl}https://newsapi.org/v2/everything?qInTitle=${qInTitle}&from=${from}language=en&apiKey=${apiKey}`;
-// const request = new Request(url);
-
-// fetch(request)
-//   .then(response => response.json())
-//   .then((news) => {
-//     console.log(news);
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
-// }
-// checking()
-
-
   const updateNews = async () => {
-    
     
       let a = props.category;
       document.title = a.charAt(0).toUpperCase() + a.slice(1, a.length);
-    
 
     props.setProgress(10);
   //  console.log("DidMount");
@@ -73,22 +48,9 @@ export default function News(props) {
   }, [])
   
 
-
-
-
-
-
-
-
-  // let { apiKey, category, mode } = this.props;
-
   const fetchMoreData = async () => {
 
     props.setProgress(10);
-    // setloading(true);
-    // this.setState({
-    //   page : this.state.page + 1,
-    // });
 
     let promise = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`);
     let response = await promise.json();
@@ -102,11 +64,7 @@ export default function News(props) {
 
     props.setProgress(100);
 
-
   }
-
-
-
 
   return (
 
@@ -114,11 +72,7 @@ export default function News(props) {
       <div className='container' style={{ backgroundColor: (props.mode === 'dark' ? 'black' : 'white') }} >
         <div><h2 style={{ color: (props.mode === 'dark' ? 'white' : 'black'), paddingTop: '40px',marginTop:'30px' }} className='text-center'><u>NewsWave</u> : <u>Top headlines</u></h2></div>
 
-
         {(loading === true) ? (<Spinner />):""}
-
-
-
 
         <InfiniteScroll
           dataLength={articles.length}
@@ -141,15 +95,6 @@ export default function News(props) {
             </div>
           </div>
         </InfiniteScroll>
-
-
-
-
-
-        {/* <div className='container' style={{ backgroundColor: (mode === 'dark' ? 'black' : ''), display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '50px' }} >
-              <button disabled={this.state.page <= 1} onClick={this.state.page > 1 ? handleOnClickPrevious : null} type="button" className="btn btn-primary">&larr; Previous</button>
-              <button disabled={this.state.page >= Math.ceil(this.state.totalResults / pageSize)} onClick={handleOnClickNext} type="button" className="btn btn-primary">Next &rarr;</button>
-            </div> */}
 
       </div>
     </div>
